@@ -1,0 +1,21 @@
+query getTests(
+  $cursor: TestWhereUniqueInput
+  $skip: Int!
+  $take: Int!
+  $order: TestOrderByInput!
+  $where: TestWhereInput
+  $search: SearchInput
+) {
+  payload: tests(
+    cursor: $cursor
+    skip: $skip
+    take: $take
+    orderBy: $order
+    where: $where
+    search: $search
+  ) {
+    uuid
+    name
+    description
+  }
+}
