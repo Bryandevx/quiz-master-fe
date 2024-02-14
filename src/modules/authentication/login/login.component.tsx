@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { FC, useContext } from "react";
-import AuthContext from "../../../shared/contexts/auth.context";
+import AuthContext from "@/shared/contexts/auth.context";
 import {
   ILoginFormValues,
   INITIAL_LOGIN_VALUES,

@@ -1,20 +1,13 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import SidebarComponent from "../modules/navigation/sidebar.component";
-import SearchbarComponent from "../modules/navigation/searchbar.component";
 import TestListComponent from "../modules/tests/test-list/test-list.component";
-
-import { Box, Button, ChakraProvider, Flex, VStack } from "@chakra-ui/react";
+import { Box, Flex, VStack } from "@chakra-ui/react";
 import {
   useUserQuery,
   useCreateTestMutation,
   Role,
   Status,
   Level,
-} from "../shared/generated/graphql-schema";
-import SearchBar from "../modules/navigation/searchbar.component";
-import Sidebar from "../modules/navigation/sidebar.component";
-
+} from "@/shared/generated/graphql-schema";
+import { SearchBar, Sidebar } from "@/modules/navigation";
 export default function Home() {
   return (
     <Flex h="100vh">

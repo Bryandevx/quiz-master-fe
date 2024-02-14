@@ -1,13 +1,13 @@
 import { Box, Button, Flex, Spinner } from "@chakra-ui/react";
 import { FC, useCallback, useContext, useEffect, useState } from "react";
-import TestCardComponent from "../shared/components/test-card.component";
+import { TestCardComponent } from "@/modules/tests/shared/components";
 import {
   TestWhereUniqueInput,
   OrderByArg,
   useGetTestsQuery,
 } from "@/shared/generated/graphql-schema";
-import { Test } from "../shared/model/test";
-import AuthContext from "../../../shared/contexts/auth.context";
+import { Test } from "@/modules/tests/shared/model/test";
+import AuthContext from "@/shared/contexts/auth.context";
 import { useRouter } from "next/router";
 
 const TestListComponent: FC = () => {

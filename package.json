@@ -1,4 +1,13 @@
 {
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/modules/*"],
+      "@model/*": ["src/pages/*"],
+      "@shared/*": ["src/shared/*"],
+      "@queries/*": ["src/queries/*"]
+    }
+  },
   "name": "quiz-master-frontend",
   "version": "0.1.0",
   "private": true,

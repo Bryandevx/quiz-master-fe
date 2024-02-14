@@ -7,8 +7,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { FC, useState } from "react";
-//import { MdPlayCircleOutline } from "react-icons/md";
-import { Test } from "../model/test";
+import { Test } from "@/modules/tests/shared/model/test";
 
 interface ITestCardProps {
   test: Test;
