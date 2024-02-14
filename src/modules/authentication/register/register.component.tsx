@@ -23,9 +23,9 @@ import {
   ISignUpFormValues,
   INITIAL_SIGN_UP_VALUES,
   SIGN_UP_FORM_SCHEMA,
-} from "./signup.util";
+} from "./register.util";
 
-const SignUpComponent: FC = () => {
+const RegisterComponent: FC = () => {
   const [signup] = useSignupMutation();
 
   const router = useRouter();
@@ -175,4 +175,4 @@ const SignUpComponent: FC = () => {
   );
 };
 
-export default SignUpComponent;
+export default RegisterComponent;
