@@ -24,14 +24,17 @@ import {
   INITIAL_SIGN_UP_VALUES,
   SIGN_UP_FORM_SCHEMA,
 } from "./register.util";
+import { useTranslation } from "@/shared/hooks";
 
 const RegisterComponent: FC = () => {
-  const [signup] = useSignupMutation();
+  const { t } = useTranslation();
+  console.log(t("coach.information.email"));
 
+  const [signup] = useSignupMutation();
   const router = useRouter();
 
   const onSubmit = async () => {
-    console.log("HI THERE 1!!!");
+    console.log("SUBMIT!");
     await signup({
       variables: {
         data: values,
@@ -54,11 +57,9 @@ const RegisterComponent: FC = () => {
         <Flex p={8} flex={1} align={"center"} justify={"center"}>
           <Stack spacing={4} w={"full"} maxW={"md"}>
             <Stack align={"center"}>
-              <Heading fontSize={"4xl"} textAlign={"center"}>
-                Sign up
-              </Heading>
+              <Heading fontSize={"4xl"} textAlign={"center"}></Heading>
               <Text fontSize={"lg"} color={"gray.600"}>
-                to enjoy all our free movies ✌️
+                {t("coach.information.email")}
               </Text>
             </Stack>
             <HStack>

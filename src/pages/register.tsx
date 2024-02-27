@@ -1,8 +1,8 @@
-import SignUpComponent from "@/modules/auth/register/register.component";
+import { RegisterComponent } from "@/modules/auth";
 import { FC } from "react";
 
 const Register: FC = () => {
-  return <SignUpComponent></SignUpComponent>;
+  return <RegisterComponent></RegisterComponent>;
 };
 
 export default Register;

@@ -13,17 +13,19 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { FC, useContext } from "react";
+import { FC, useContext, useTransition } from "react";
 import AuthContext from "@/shared/contexts/auth.context";
 import {
   ILoginFormValues,
   INITIAL_LOGIN_VALUES,
   LOGIN_FORM_SCHEMA,
 } from "./login.util";
+import { useTranslation } from "@/shared/hooks";
 
 const LoginComponent: FC = () => {
   const { login, isLoading } = useContext(AuthContext);
-
+  const { t } = useTranslation();
+  console.log(t("coach.information.email"));
   const onSubmit = async () => {
     console.log(values);
     await login(values.email, values.password);

@@ -41,6 +41,11 @@ export type AnswerWhereUniqueInput = {
   uuid: Scalars['String'];
 };
 
+export enum Language {
+  English = 'ENGLISH',
+  Spanish = 'SPANISH'
+}
+
 export enum Level {
   Advanced = 'ADVANCED',
   Beginner = 'BEGINNER',
@@ -247,6 +252,7 @@ export type User = {
   email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Float']>;
+  language?: Maybe<Language>;
   lastName?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Role>;
@@ -308,7 +314,7 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', uuid?: string | null, username?: string | null, email?: string | null } | null };
+export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', uuid?: string | null, username?: string | null, email?: string | null, language?: Language | null } | null };
 
 
 export const GetTestsDocument = gql`
@@ -488,6 +494,7 @@ export const UserDocument = gql`
     uuid
     username
     email
+    language
   }
 }
     `;

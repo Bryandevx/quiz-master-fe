@@ -3,5 +3,6 @@ query user($where: UserWhereUniqueInput!) {
     uuid
     username
     email
+    language
   }
 }
