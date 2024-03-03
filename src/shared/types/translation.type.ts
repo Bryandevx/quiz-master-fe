@@ -10,100 +10,16 @@ export interface LanguageOption {
 }
 
 export interface Dictionary {
-  global: {
-    language: {
-      en: string;
-      es: string;
-    };
-    languagePrefix: {
-      en: string;
-      es: string;
-    };
-    gender: GenderDictionary;
-    time: {
-      day: string;
-      days: string;
-    };
-    weekDay: WeekDayPrefixDictionary;
-    weekDayPrefix: WeekDayPrefixDictionary;
-    muscleGroup: MuscleGroupDictionary;
-    announcements: {
-      comingSoon: string;
-    };
-    error: {
-      required: string;
-      tooShort: string;
-      tooLong: string;
-      invalidString: string;
-      invalidNumber: string;
-      invalidEmail: string;
-      invalidPassword: string;
-      invalidConfirmPassword: string;
-      specialCharacterRequired: string;
-      numericDigitRequired: string;
-      lowerCaseRequired: string;
-      upperCaseRequired: string;
-      notSpacesAndSpecialCharacters: string;
-      defaultError: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      versionMismatchException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      emailExistsException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      usernameExistsException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      notAuthorizedException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      userNotConfirmedException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      limitExceededException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      expiredCodeException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-      codeMismatchException: {
-        title: string;
-        message: string;
-        button: string;
-      };
-    };
-  };
-  launch: {
+  home: {
     title: string;
-    subtitle: string;
-    login: string;
-    register: string;
-  };
-  forgotPassword: {
-    title: string;
-    form: {
-      email: string;
-      submit: string;
-      verificationCode: string;
-      newPassword: string;
+    searchbar: {
+      placeholder: string;
+    };
+    sidemenu: {
+      myProfile: string;
+      tests: string;
+      createTest: string;
+      signOut: string;
     };
   };
   login: {
@@ -124,170 +40,17 @@ export interface Dictionary {
       };
     };
   };
-  home: {
-    title: string;
-    feed: {
-      viewAll: string;
-      programs: string;
-      coaches: string;
-      articles: string;
-    };
-  };
-  profile: {
-    title: string;
-    unlock: string;
-    invite: string;
-    stats: {
-      workouts: string;
-      plans: string;
-      bodyMeasures: string;
-    };
-    general: {
-      title: string;
-      labels: {
-        username: string;
-        fullName: string;
-        email: string;
-        gender: string;
-      };
-    };
-    account: {
-      title: string;
-      labels: {
-        language: string;
-        notifications: string;
-        changePassword: string;
-        logout: string;
-      };
-    };
+  register: {
     form: {
-      submit: string;
       firstName: string;
       lastName: string;
-      password: string;
-      newPassword: string;
-      repeatPassword: string;
-    };
-  };
-  train: {
-    title: string;
-    plan: {
-      progress: string;
-      routine: string;
-      nutritionalPlan: string;
-      bodyMeasures: string;
-      workouts: string;
-      inProgressRoutine: string;
-      progressDays: string;
-      coaches: {
-        title: string;
-        invite: string;
-      };
-      areas: {
-        general: string;
-        nutrition: string;
-      };
-      noPlan: {
-        title: string;
-        description: string;
-        action: string;
-      };
-      planPending: {
-        title: string;
-        description: string;
-        action: string;
-      };
-    };
-    routineDay: {
-      start: string;
-      finish: string;
-      summary: string;
-      discardChanges: {
-        title: string;
-        description: string;
-        primaryAction: string;
-        secondaryAction: string;
-      };
-      pendingWorkouts: {
-        title: string;
-        description: string;
-        primaryAction: string;
-        secondaryAction: string;
-      };
-      emptyWorkouts: {
-        title: string;
-        description: string;
-        primaryAction: string;
-        secondaryAction: string;
-      };
-    };
-    exercisePreview: {
-      involvedMuscles: string;
-    };
-    tracker: {
-      timer: {
-        breakTimer: string;
-      };
-      workoutForm: {
-        sets: string;
-        reps: string;
-        timer: string;
-        weight: string;
-        breakTimer: string;
-        submit: string;
-      };
-    };
-    feedback: {
-      congrats: string;
-      completed: string;
-      workouts: string;
-      pendingWorkouts: string;
-      difficulty: {
-        question: string;
-        firstAnswer: string;
-        secondAnswer: string;
-        thirdAnswer: string;
-      };
-      enjoyment: {
-        question: string;
-        firstAnswer: string;
-        secondAnswer: string;
-        thirdAnswer: string;
-      };
-      submit: string;
-    };
-  };
-  coach: {
-    readMore: string;
-    information: {
-      title: string;
       email: string;
-      phone: string;
-      yearsOfExperience: string;
+      username: string;
+      password: string;
+      submit: string;
+      alreadyRegister: string;
+      login: string;
     };
-  };
-  article: {
-    author: {
-      statement: string;
-    };
-  };
-  salePlan: {
-    coach: string;
-    apply: string;
-    status: {
-      available: string;
-      unavailable: string;
-    };
-    info: {
-      price: string;
-      duration: string;
-      nutritionalPlan: string;
-      workoutRoutine: string;
-    };
-  };
-
-  notFound: {
-    title: string;
   };
 }
 
@@ -313,33 +76,5 @@ export type LanguageDictionary = {
   en: string;
   es: string;
 };
-
-export interface WeekDayPrefixDictionary {
-  monday: string;
-  tuesday: string;
-  wednesday: string;
-  thursday: string;
-  friday: string;
-  saturday: string;
-  sunday: string;
-}
-
-export interface MuscleGroupDictionary {
-  calves: string;
-  hamstrings: string;
-  quadriceps: string;
-  glutes: string;
-  biceps: string;
-  triceps: string;
-  forearms: string;
-  trapezius: string;
-  latissimus: string;
-  chest: string;
-  back: string;
-  arms: string;
-  abs: string;
-  legs: string;
-  shoulders: string;
-}
 
 export type DictionaryLeaves = Leaves<Dictionary, 4>;

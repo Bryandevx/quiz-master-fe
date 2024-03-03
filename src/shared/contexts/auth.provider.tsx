@@ -62,6 +62,7 @@ const AuthProvider: FC<{ children: any }> = ({ children }) => {
 
   const login = async (email: string, password: string) => {
     try {
+      console.log("HERE! " + email + " ---> " + password);
       setIsLoading(true);
       const response = await loginMutation({
         variables: {

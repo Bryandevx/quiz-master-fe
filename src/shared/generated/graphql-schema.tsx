@@ -254,7 +254,6 @@ export type User = {
   id?: Maybe<Scalars['Float']>;
   language?: Maybe<Language>;
   lastName?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   type?: Maybe<Role>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   username?: Maybe<Scalars['String']>;
@@ -300,14 +299,14 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginOutput', access_token: string, expiresAt: any, user: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, name?: string | null, type?: Role | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginOutput', access_token: string, expiresAt: any, user: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, type?: Role | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } } };
 
 export type SignupMutationVariables = Exact<{
   data: SignUpInput;
 }>;
 
 
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, name?: string | null, type?: Role | null, firstName?: string | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } };
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, type?: Role | null, firstName?: string | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } };
 
 export type UserQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -411,7 +410,6 @@ export const LoginDocument = gql`
       uuid
       email
       username
-      name
       type
       lastName
       createdAt
@@ -453,7 +451,6 @@ export const SignupDocument = gql`
     uuid
     email
     username
-    name
     type
     firstName
     lastName

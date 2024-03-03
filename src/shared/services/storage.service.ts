@@ -6,7 +6,13 @@ import { Language } from "../generated";
 
 enum StorageName {
   LANGUAGE = "@language",
+  AUTH_TOKEN = "@auth_token"
 }
+
+
+// enum StorageName {
+//   LANGUAGE = "@language",
+// }
 
 class StorageService {
   async clear() {

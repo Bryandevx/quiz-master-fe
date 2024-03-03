@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Link, VStack, Text, Divider } from "@chakra-ui/react";
+import { useTranslation } from "@/shared/hooks";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       w="250px" // Ancho del sidebar
@@ -15,17 +18,17 @@ const Sidebar = () => {
       </Text>
       <VStack align="stretch" spacing="4">
         <Link href="#" _hover={{ textDecor: "none", color: "blue.200" }}>
-          My Profile
+          {t("home.sidemenu.myProfile")}
         </Link>
         <Link href="#" _hover={{ textDecor: "none", color: "blue.200" }}>
-          Tests
+          {t("home.sidemenu.tests")}
         </Link>
         <Link href="#" _hover={{ textDecor: "none", color: "blue.200" }}>
-          Create Test
+          {t("home.sidemenu.createTest")}
         </Link>
         <Divider borderColor="gray.600" />
         <Link href="#" _hover={{ textDecor: "none", color: "red.300" }}>
-          Sign Out
+          {t("home.sidemenu.signOut")}
         </Link>
       </VStack>
     </Box>
