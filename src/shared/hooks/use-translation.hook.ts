@@ -18,6 +18,7 @@ const useTranslation = () => {
   const [language, setLanguage] = useGlobalState<LanguageState>(
     GlobalState.LANGUAGE
   );
+  console.log(language);
 
   const t: Translator = useCallback(
     (path) => {

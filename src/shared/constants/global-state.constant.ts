@@ -1,4 +1,4 @@
 export enum GlobalState {
-  //USER = "userState",
+  USER = "userState",
   LANGUAGE = "languageState",
 }

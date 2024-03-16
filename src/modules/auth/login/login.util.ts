@@ -1,16 +1,19 @@
-import * as Yup from "yup";
+import { AuthCredentials, ValidationForm } from "../../../shared/types";
 
-export interface ILoginFormValues {
+import {
+  emailValidationForm,
+  passwordValidationForm,
+} from "./../register/register.util";
+
+export interface LoginFormValues extends AuthCredentials {
   email: string;
   password: string;
 }
 
-export const LOGIN_FORM_SCHEMA = Yup.object().shape({
-  email: Yup.string().required("required"),
-  password: Yup.string().required("required"),
-});
-
-export const INITIAL_LOGIN_VALUES: ILoginFormValues = {
+export const initialValues: LoginFormValues = {
   email: "",
   password: "",
 };
+
+// export const validation: ValidationForm<LoginFormValues> = (t) =>
+//   emailValidationForm(t).concat(passwordValidationForm(t));

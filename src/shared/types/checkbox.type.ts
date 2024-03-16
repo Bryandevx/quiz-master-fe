@@ -1,10 +1,9 @@
-// import { DictionaryLeaves, FormField} from '.';
+import { DictionaryLeaves, FormField } from ".";
 
-// interface DynamicLabel {
-//   text: DictionaryLeaves;
-//   link?: RouteLink;
-// }
+interface DynamicLabel {
+  text: DictionaryLeaves;
+}
 
-// export interface CheckboxProps<N = string> extends FormField<N> {
-//   labels: DynamicLabel[];
-// }
+export interface CheckboxProps<N = string> extends FormField<N> {
+  labels: DynamicLabel[];
+}

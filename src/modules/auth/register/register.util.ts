@@ -1,25 +1,134 @@
 import * as Yup from "yup";
 
-export interface ISignUpFormValues {
+import { Regex } from "../../../shared/constants";
+
+import { Translator, ValidationForm } from "../../../shared/types";
+
+export const passwordValidation = (t: Translator) =>
+  Yup.string()
+    .min(8, t("global.error.tooShort"))
+    .max(20, t("global.error.tooLong"))
+    .matches(/^(?=.*[@$!%*#?&])/, t("global.error.specialCharacterRequired"))
+    .matches(/^(?=.*\d)/, t("global.error.numericDigitRequired"))
+    .matches(/^(?=.*[a-z])/, t("global.error.lowerCaseRequired"))
+    .matches(/^(?=.*[A-Z])/, t("global.error.upperCaseRequired"))
+    .required(t("global.error.required"));
+
+export const verificationCodeValidation = (t: Translator) =>
+  Yup.string()
+    .min(2, t("global.error.tooShort"))
+    .max(20, t("global.error.tooLong"))
+    .required(t("global.error.required"));
+
+export const emailValidationForm: ValidationForm<{ email: string }> = (t) =>
+  Yup.object({
+    email: Yup.string()
+      .email(t("global.error.invalidEmail"))
+      .required(t("global.error.required")),
+  });
+
+export const passwordValidationForm: ValidationForm<{ password: string }> = (
+  t
+) =>
+  Yup.object({
+    password: passwordValidation(t),
+  });
+
+export const verificationCodeValidationForm: ValidationForm<{
+  verificationCode: string;
+}> = (t) =>
+  Yup.object({
+    verificationCode: verificationCodeValidation(t),
+  });
+
+export const newPasswordValidationForm: ValidationForm<{
+  newPassword: string;
+}> = (t) =>
+  Yup.object({
+    newPassword: passwordValidation(t),
+  });
+
+// export const confirmPasswordValidationForm: ValidationForm<{
+//   password: string;
+//   confirmPassword: string;
+// }> = (t) =>
+//   Yup.object({
+//     confirmPassword: Yup.string()
+//       .oneOf([Yup.ref("password")], t("global.error.invalidConfirmPassword"))
+//       .required(t("global.error.required")),
+//   }).concat(passwordValidationForm(t));
+
+// export const confirmNewPasswordValidationForm: ValidationForm<{
+//   password: string;
+//   newPassword: string;
+//   confirmPassword: string;
+// }> = (t) =>
+//   Yup.object({
+//     confirmPassword: Yup.string()
+//       .oneOf([Yup.ref("newPassword")], t("global.error.invalidConfirmPassword"))
+//       .required(t("global.error.required")),
+//   })
+//     .concat(newPasswordValidationForm(t))
+//     .concat(passwordValidationForm(t));
+
+export interface RegisterFormValues {
   email: string;
-  firstName: string;
-  lastName: string;
   username: string;
   password: string;
+  firstName: string;
+  lastName: string;
+  confirmPassword: string;
+  agreement: boolean;
+  collectData: boolean;
 }
 
-export const SIGN_UP_FORM_SCHEMA = Yup.object().shape({
-  email: Yup.string().required("required 111").email(),
-  firstName: Yup.string().required("required").max(60),
-  lastName: Yup.string().required("required").max(60),
-  username: Yup.string().required("required").min(4).max(60),
-  password: Yup.string().required("required").min(10).max(60),
-});
-
-export const INITIAL_SIGN_UP_VALUES: ISignUpFormValues = {
+export const initialValues: RegisterFormValues = {
   email: "",
-  firstName: "",
-  lastName: "",
   username: "",
   password: "",
+  firstName: "",
+  lastName: "",
+  confirmPassword: "",
+  agreement: false,
+  collectData: false,
 };
+
+// export const validation: ValidationForm<RegisterFormValues> = (t) =>
+//   Yup.object({
+//     username: Yup.string()
+//       .matches(
+//         Regex.NOT_SPACES_AND_SPECIAL_CHARACTERS,
+//         t("global.error.notSpacesAndSpecialCharacters")
+//       )
+//       .required(t("global.error.required")),
+//     firstName: Yup.string().required(t("global.error.required")),
+//     lastName: Yup.string().required(t("global.error.required")),
+//     agreement: Yup.bool()
+//       .oneOf([true], t("global.error.required"))
+//       .required(t("global.error.required")),
+//     collectData: Yup.bool()
+//       .oneOf([true], t("global.error.required"))
+//       .required(t("global.error.required")),
+//   })
+//     .concat(emailValidationForm(t))
+//     .concat(confirmPasswordValidationForm(t));
+
+// export interface ResetPasswordValues {
+//   email: string;
+//   verificationCode: string;
+//   newPassword: string;
+// }
+
+// export const resetPasswordValidation: ValidationForm<ResetPasswordValues> = (
+//   t
+// ) =>
+//   Yup.object({
+//     verificationCode: Yup.string()
+//       .matches(
+//         Regex.NOT_SPACES_AND_SPECIAL_CHARACTERS,
+//         t("global.error.notSpacesAndSpecialCharacters")
+//       )
+//       .required(t("global.error.required")),
+//   })
+//     .concat(emailValidationForm(t))
+//     .concat(newPasswordValidationForm(t));

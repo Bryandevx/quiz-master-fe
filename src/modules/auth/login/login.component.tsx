@@ -1,167 +1,80 @@
-import {
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Link,
-  Stack,
-  Image,
-  Text,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-// import { useFormik } from "formik";
-import { Formik, Field } from "formik";
-import { FC, useContext, useTransition } from "react";
-import AuthContext from "@/shared/contexts/auth.context";
-import {
-  ILoginFormValues,
-  INITIAL_LOGIN_VALUES,
-  LOGIN_FORM_SCHEMA,
-} from "./login.util";
-import { useTranslation } from "@/shared/hooks";
-import { useAuth } from "@/shared/hooks";
+import * as React from "react";
+import { Box } from "@chakra-ui/react";
 
-const LoginComponent: FC = () => {
-  const { login, isLoading } = useContext(AuthContext);
-  const { t } = useTranslation();
-  // const onSubmit = async () => {
-  //   console.log(values);
-  //   await login(values.email, values.password);
+import { Form } from "../../../shared/modules";
+
+import { useAuth } from "../../../shared/hooks";
+
+import { LoginFormValues, initialValues } from "./login.util";
+
+const Login: React.FC = () => {
+  const { login } = useAuth();
+
+  // const navigation = useNavigation();
+
+  // const forgotLink: RouteLink = {
+  //   route: GlobalRoute.AUTH,
+  //   screen: AuthScreen.FORGOT_PASSWORD,
   // };
 
-  // const { handleSubmit, handleChange, setFieldValue, values, errors, touched } =
-  //   useFormik<ILoginFormValues>({
-  //     onSubmit,
-  //     initialValues: INITIAL_LOGIN_VALUES,
-  //     validationSchema: LOGIN_FORM_SCHEMA,
-  //     enableReinitialize: true,
-  //   });
+  const onSubmit = async (values: LoginFormValues) => {
+    console.log("here!!!");
+    try {
+      await login(values);
+    } catch (error) {
+      // if (error instanceof AlertError) {
+      //   if (error.type === "UserNotConfirmedException") {
+      //     navigation.navigate(GlobalRoute.AUTH, {
+      //       screen: AuthScreen.VERIFY_ACCOUNT,
+      //       params: { email: values.email, password: values.password },
+      //     });
+      //   }
+      // }
+      // throw error;
+    }
+  };
 
   return (
-    <Formik
-      initialValues={INITIAL_LOGIN_VALUES}
-      onSubmit={async (values) => {
-        console.log("SUBMIT!");
-        console.log(values);
-        await login(values.email, values.password);
-        // router.push("/login");
-      }}
-    >
-      {({ handleSubmit, handleChange, errors, touched, values }) => (
-        <form onSubmit={handleSubmit}>
-          <Stack
-            minH={"100vh"}
-            align={"center"}
-            direction={{ base: "column", md: "row" }}
-          >
-            <Flex p={8} flex={1} align={"center"} justify={"center"}>
-              <Stack spacing={4} w={"full"} maxW={"md"}>
-                <Heading fontSize={"2xl"}>{t("login.title")}</Heading>
-                <FormControl id="email" isRequired isInvalid={!!errors.email}>
-                  <FormLabel>{t("login.form.email")}</FormLabel>
-                  <Input
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    value={values.email}
-                  />
-                  {!!errors.email ? (
-                    <FormErrorMessage>{errors.email}</FormErrorMessage>
-                  ) : (
-                    ""
-                  )}
-                </FormControl>
-                <FormControl
-                  id="password"
-                  isRequired
-                  isInvalid={!!errors.password}
-                >
-                  <FormLabel>{t("login.form.password")}</FormLabel>
-                  <Input
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    value={values.password}
-                  />
-                  {!!errors.password ? (
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  ) : (
-                    ""
-                  )}
-                </FormControl>
-                <Stack spacing={6}>
-                  <Button
-                    type="submit"
-                    colorScheme={"blackAlpha"}
-                    variant={"solid"}
-                  >
-                    {t("login.form.submit")}
-                  </Button>
-                </Stack>
-              </Stack>
-            </Flex>
-          </Stack>
-        </form>
-      )}
-    </Formik>
+    <Box p={4} shadow="md" rounded="md" bg="white">
+      <Form<LoginFormValues>
+        onSubmit={onSubmit}
+        //    validation={validation}
+        initialValues={initialValues}
+        fields={[
+          {
+            type: "field",
+            props: {
+              // disabled: isAuthenticating,
+              name: "email",
+              //     icon: "email",
+              placeholder: "login.form.email",
+            },
+          },
+          {
+            type: "field",
+            props: {
+              //disabled: isAuthenticating,
+              name: "password",
+              //         icon: "password",
+              placeholder: "login.form.password",
+              secureTextEntry: true,
+            },
+          },
+          {
+            type: "submit",
+            props: {
+              //     loading: isAuthenticating,
+              uppercase: true,
+              block: true,
+              text: "login.form.submit",
+              //     mt: 4,
+            },
+          },
+        ]}
+      />
+      {}
+    </Box>
   );
-
-  // return (
-  //   <form>
-  //     <Stack
-  //       minH={"100vh"}
-  //       align={"center"}
-  //       direction={{ base: "column", md: "row" }}
-  //     >
-  //       <Flex p={8} flex={1} align={"center"} justify={"center"}>
-  //         <Stack spacing={4} w={"full"} maxW={"md"}>
-  //           <Heading fontSize={"2xl"}>{t("login.title")}</Heading>
-  //           <FormControl id="email" isRequired isInvalid={!!errors.email}>
-  //             <FormLabel>{t("login.form.email")}</FormLabel>
-  //             <Input
-  //               type="email"
-  //               name="email"
-  //               onChange={handleChange}
-  //               value={values.email}
-  //             />
-  //             {!!errors.email ? (
-  //               <FormErrorMessage>{errors.email}</FormErrorMessage>
-  //             ) : (
-  //               ""
-  //             )}
-  //           </FormControl>
-  //           <FormControl id="password" isRequired isInvalid={!!errors.password}>
-  //             <FormLabel>{t("login.form.password")}</FormLabel>
-  //             <Input
-  //               type="password"
-  //               name="password"
-  //               onChange={handleChange}
-  //               value={values.password}
-  //             />
-  //             {!!errors.password ? (
-  //               <FormErrorMessage>{errors.password}</FormErrorMessage>
-  //             ) : (
-  //               ""
-  //             )}
-  //           </FormControl>
-  //           <Stack spacing={6}>
-  //             <Button
-  //               type="submit"
-  //               onClick={onSubmit}
-  //               colorScheme={"blackAlpha"}
-  //               variant={"solid"}
-  //             >
-  //               {t("login.form.submit")}
-  //             </Button>
-  //           </Stack>
-  //         </Stack>
-  //       </Flex>
-  //     </Stack>
-  //   </form>
-  // );
 };
 
-export default LoginComponent;
+export default Login;

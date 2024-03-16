@@ -4,8 +4,8 @@ mutation signup($data: SignUpInput!) {
     uuid
     email
     username
-    type
     firstName
+    type
     lastName
     createdAt
     updatedAt

@@ -1,7 +1,10 @@
 import { Language } from "../generated";
 
-import { LanguageOption, WeekDayPrefixDictionary } from "./../types";
+import { LanguageOption } from "./../types";
+
 export * from "./global-state.constant";
+export * from "./regex.constant";
+export * from "./auth.constant";
 
 interface ConstantsValues {
   PARAM: string;

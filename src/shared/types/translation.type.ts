@@ -10,6 +10,96 @@ export interface LanguageOption {
 }
 
 export interface Dictionary {
+  global: {
+    language: {
+      en: string;
+      es: string;
+    };
+    languagePrefix: {
+      en: string;
+      es: string;
+    };
+    gender: GenderDictionary;
+    time: {
+      day: string;
+      days: string;
+    };
+
+    announcements: {
+      comingSoon: string;
+    };
+    error: {
+      required: string;
+      tooShort: string;
+      tooLong: string;
+      invalidString: string;
+      invalidNumber: string;
+      invalidEmail: string;
+      invalidPassword: string;
+      invalidConfirmPassword: string;
+      specialCharacterRequired: string;
+      numericDigitRequired: string;
+      lowerCaseRequired: string;
+      upperCaseRequired: string;
+      notSpacesAndSpecialCharacters: string;
+      defaultError: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      versionMismatchException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      emailExistsException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      usernameExistsException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      notAuthorizedException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      userNotConfirmedException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      limitExceededException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      expiredCodeException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+      codeMismatchException: {
+        title: string;
+        message: string;
+        button: string;
+      };
+    };
+  };
+  profile: {
+    general: {
+      labels: {
+        username: string;
+        email: string;
+        fullName: string;
+        language: string;
+        changePassword: string;
+      };
+    };
+  };
   home: {
     title: string;
     searchbar: {

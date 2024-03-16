@@ -47,6 +47,99 @@ const EnglishDictionary: Dictionary = {
       signOut: "Sign Out",
     },
   },
+  profile: {
+    general: {
+      labels: {
+        username: "",
+        email: "",
+        fullName: "",
+        language: "",
+        changePassword: "",
+      },
+    },
+  },
+  global: {
+    language: {
+      en: "",
+      es: "",
+    },
+    languagePrefix: {
+      en: "",
+      es: "",
+    },
+    gender: {
+      male: "",
+      female: "",
+      notSpecified: "",
+    },
+    time: {
+      day: "",
+      days: "",
+    },
+    announcements: {
+      comingSoon: "",
+    },
+    error: {
+      required: "",
+      tooShort: "",
+      tooLong: "",
+      invalidString: "",
+      invalidNumber: "",
+      invalidEmail: "",
+      invalidPassword: "",
+      invalidConfirmPassword: "",
+      specialCharacterRequired: "",
+      numericDigitRequired: "",
+      lowerCaseRequired: "",
+      upperCaseRequired: "",
+      notSpacesAndSpecialCharacters: "",
+      defaultError: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      versionMismatchException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      emailExistsException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      usernameExistsException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      notAuthorizedException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      userNotConfirmedException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      limitExceededException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      expiredCodeException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+      codeMismatchException: {
+        title: "",
+        message: "",
+        button: "",
+      },
+    },
+  },
 };
 
 export default EnglishDictionary;

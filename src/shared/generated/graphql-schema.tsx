@@ -72,6 +72,7 @@ export type Mutation = {
   createUser: User;
   login: LoginOutput;
   signup: User;
+  updateUser: User;
 };
 
 
@@ -102,6 +103,11 @@ export type MutationLoginArgs = {
 
 export type MutationSignupArgs = {
   data: SignUpInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  data: UserUpdateInput;
 };
 
 export enum OrderByArg {
@@ -269,8 +275,18 @@ export type UserCreateInput = {
   username: Scalars['String'];
 };
 
+export type UserUpdateInput = {
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Role>;
+  username?: InputMaybe<Scalars['String']>;
+};
+
 export type UserWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   uuid?: InputMaybe<Scalars['String']>;
 };
@@ -306,14 +322,21 @@ export type SignupMutationVariables = Exact<{
 }>;
 
 
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, type?: Role | null, firstName?: string | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } };
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, firstName?: string | null, type?: Role | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } };
+
+export type UpdateUserMutationVariables = Exact<{
+  data: UserUpdateInput;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', email?: string | null, firstName?: string | null, lastName?: string | null } };
 
 export type UserQueryVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', uuid?: string | null, username?: string | null, email?: string | null, language?: Language | null } | null };
+export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: number | null, uuid?: string | null, email?: string | null, username?: string | null, firstName?: string | null, type?: Role | null, lastName?: string | null, createdAt?: any | null, updatedAt?: any | null } | null };
 
 
 export const GetTestsDocument = gql`
@@ -451,8 +474,8 @@ export const SignupDocument = gql`
     uuid
     email
     username
-    type
     firstName
+    type
     lastName
     createdAt
     updatedAt
@@ -485,13 +508,53 @@ export function useSignupMutation(baseOptions?: Apollo.MutationHookOptions<Signu
 export type SignupMutationHookResult = ReturnType<typeof useSignupMutation>;
 export type SignupMutationResult = Apollo.MutationResult<SignupMutation>;
 export type SignupMutationOptions = Apollo.BaseMutationOptions<SignupMutation, SignupMutationVariables>;
+export const UpdateUserDocument = gql`
+    mutation updateUser($data: UserUpdateInput!) {
+  updateUser(data: $data) {
+    email
+    firstName
+    lastName
+  }
+}
+    `;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const UserDocument = gql`
     query user($where: UserWhereUniqueInput!) {
   user(where: $where) {
+    id
     uuid
-    username
     email
-    language
+    username
+    firstName
+    type
+    lastName
+    createdAt
+    updatedAt
   }
 }
     `;

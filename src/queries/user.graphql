@@ -1,8 +1,13 @@
 query user($where: UserWhereUniqueInput!) {
   user(where: $where) {
+    id
     uuid
-    username
     email
-    language
+    username
+    firstName
+    type
+    lastName
+    createdAt
+    updatedAt
   }
 }
