@@ -16,6 +16,7 @@ import useGetTokens from "./use-get-token.hook";
 import useRefreshIdToken from "./use-refresh-token.hook";
 // import useChangePassword from './use-change-password.hook';
 import useRegister from "./use-register.hook";
+import useNavigation from "./use-navigation.hook";
 
 export {
   useAuth,
@@ -23,7 +24,7 @@ export {
   //   useTheme,
   //   useTimer,
   useRegister,
-  //   useGetCoach,
+  useNavigation,
   //   useTraining,
   useGetTokens,
   //   useGetArticle,

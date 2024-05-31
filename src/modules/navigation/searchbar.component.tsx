@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 import { Input, Button, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons"; //CREATE COMPONENT ICON
 
 const SearchBar = () => {
   return (

@@ -1,8 +1,12 @@
-import * as React from "react";
+import React, { FC } from "react";
+
 import _ from "lodash";
-import { Checkbox as ChakraCheckbox, Box } from "@chakra-ui/react"; // Importa los componentes de Chakra UI
-import { Link, Typography } from "../../modules";
-import { CheckboxProps } from "../../types";
+
+import { Checkbox as ChakraCheckbox, Box } from "@chakra-ui/react";
+
+import { Typography } from "@/shared/modules";
+
+import { CheckboxProps } from "@/shared/types";
 
 const Checkbox: React.FC<CheckboxProps> = ({
   disabled,
@@ -23,13 +27,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
       onChange={(e) => onFormSetValue && onFormSetValue(e.target.checked)}
     >
       <Box display="flex" flexDirection="row" flexWrap="wrap" pl={4}>
-        {labels.map(({ text, link }, index) =>
-          link ? (
-            <Link key={`label-${index}`} to={link} text={text} mr={1} />
-          ) : (
-            <Typography key={`label-${index}`} path={text} mr={1} />
-          )
-        )}
+        {labels.map(({ text }, index) => (
+          <Typography key={`label-${index}`} />
+        ))}
       </Box>
     </ChakraCheckbox>
   );

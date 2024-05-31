@@ -1,4 +1,4 @@
-import { CommonStyleProps, DictionaryLeaves /*, RouteLink*/ } from ".";
+import { CommonStyleProps, DictionaryLeaves } from ".";
 
 export type ButtonVariant =
   | "ghost"
@@ -14,7 +14,6 @@ export interface ButtonProps extends CommonStyleProps {
   block?: boolean;
   disabled?: boolean;
   uppercase?: boolean;
-  // link?: RouteLink;
   loading?: boolean;
   onClick?: () => unknown;
 }

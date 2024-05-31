@@ -1,19 +1,20 @@
 import * as React from "react";
 import _ from "lodash";
+import { Icon } from "@/shared/modules";
 import {
   FormControl,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Icon as ChakraIcon,
   FormErrorMessage,
   FormLabel,
-} from "@chakra-ui/react"; // Importa los componentes de Chakra UI
-import { useTranslation } from "../../hooks";
-import { FieldProps } from "../../types";
+} from "@chakra-ui/react";
+import { useTranslation } from "@/shared/hooks";
+import { FieldProps } from "@/shared/types";
 
 const Field: React.FC<FieldProps> = ({
+  icon,
   value,
   disabled,
   error,
@@ -23,16 +24,6 @@ const Field: React.FC<FieldProps> = ({
   secureTextEntry,
   onFormChange,
 }) => {
-  console.log("Props:", {
-    value,
-    disabled,
-    error,
-    label,
-    placeholder,
-    leftAddonText,
-    secureTextEntry,
-    onFormChange,
-  });
   const { t } = useTranslation();
   const colorPalette = {
     muted: { 400: "#718096" },
@@ -53,7 +44,6 @@ const Field: React.FC<FieldProps> = ({
           size="lg"
           isDisabled={disabled}
           autoCapitalize="none"
-          // isInvalid={!!error}
           value={value}
           onChange={(e) => onFormChange && onFormChange(e.target.value)}
           placeholder={placeholder && t ? t(placeholder) : ""}
@@ -62,12 +52,7 @@ const Field: React.FC<FieldProps> = ({
         {secureTextEntry && (
           <InputRightElement
             color={colorPalette.muted[400]}
-            children={
-              <ChakraIcon
-                name={isTextEntrySecure ? "view-off" : "view"}
-                onClick={toggleVisibilityOff}
-              />
-            }
+            children={<Icon name={icon} size="24px" color="green.500" />}
           />
         )}
         {leftAddonText && (

@@ -1,7 +1,7 @@
 import Form from "./form/form.component";
-// import Icon from "./icon/icon.component";
+import Icon from "./icon/icon.component";
 // import View from "./view/view.component";
-// import Link from "./link/link.component";
+import Link from "./link/link.component";
 // import Item from "./item/item.component";
 // import Card from "./card/card.component";
 // import Badge from "./badge/badge.component";
@@ -11,6 +11,8 @@ import Field from "./field/field.component";
 import Radio from "./radio/radio.component";
 // import Avatar from "./avatar/avatar.component";
 import Button from "./button/button.component";
+import Box from "./box/box.component";
+
 // import Header from "./header/header.component";
 // import Switch from "./switch/switch.component";
 // import Content from "./content/content.component";
@@ -21,7 +23,7 @@ import Checkbox from "./checkbox/checkbox.component";
 // import Carousel from "./carousel/carousel.component";
 // import Progress from "./progress/progress.component";
 // import LabelList from "./label-list/label-list.component";
-// import Typography from "./typography/typography.component";
+import Typography from "./typography/typography.component";
 // import ScrollList from "./scroll-list/scroll-list.component";
 // import ListSlider from "./list-slider/list-slider.component";
 // import AlertDialog from "./alert-dialog/alert-dialog.component";
@@ -35,9 +37,9 @@ import Checkbox from "./checkbox/checkbox.component";
 
 export {
   Form,
-  // Icon,
+  Icon,
   // View,
-  // Link,
+  Link,
   // Item,
   // Card,
   // Badge,
@@ -47,6 +49,7 @@ export {
   Radio,
   // Avatar,
   Button,
+  Box,
   // Header,
   // Switch,
   // Content,
@@ -58,7 +61,7 @@ export {
   // Carousel,
   // LabelList,
   // ListSlider,
-  // Typography,
+  Typography,
   // ScrollList,
   // AlertDialog,
   // ActionSheet,

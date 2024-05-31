@@ -1,0 +1,48 @@
+// icon.util.ts
+import {
+  AddIcon,
+  SearchIcon,
+  CheckIcon,
+  CloseIcon,
+  WarningIcon,
+  InfoIcon,
+  EmailIcon,
+  SettingsIcon,
+  EditIcon,
+  DeleteIcon,
+  CalendarIcon,
+  TimeIcon,
+  ArrowUpDownIcon,
+  StarIcon,
+  UnlockIcon,
+  LockIcon,
+  PhoneIcon,
+  AtSignIcon,
+  ChatIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
+
+const iconMap: any = {
+  AddIcon,
+  SearchIcon,
+  CheckIcon,
+  CloseIcon,
+  WarningIcon,
+  InfoIcon,
+  EmailIcon,
+  SettingsIcon,
+  EditIcon,
+  DeleteIcon,
+  CalendarIcon,
+  TimeIcon,
+  ArrowUpDownIcon,
+  StarIcon,
+  UnlockIcon,
+  LockIcon,
+  PhoneIcon,
+  AtSignIcon,
+  ChatIcon,
+  ChevronRightIcon,
+};
+
+export default iconMap;

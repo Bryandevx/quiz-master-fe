@@ -1,6 +1,8 @@
 import React, { FC } from "react";
-import { Skeleton as ChakraSkeleton } from "@chakra-ui/react"; // Importa el componente Skeleton de Chakra UI
-import { SkeletonProps } from "../../types";
+
+import { Skeleton as ChakraSkeleton } from "@chakra-ui/react";
+
+import { SkeletonProps } from "@/shared/types";
 
 const Skeleton: FC<SkeletonProps> = ({
   children,
@@ -13,7 +15,7 @@ const Skeleton: FC<SkeletonProps> = ({
     <ChakraSkeleton height={w} width={h} {...otherStyles} />
   ) : (
     children
-  ); // Utiliza los nombres de las props de Chakra UI
+  );
 };
 
 export default Skeleton;

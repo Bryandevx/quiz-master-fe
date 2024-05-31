@@ -1,8 +1,5 @@
 import * as Yup from "yup";
-
-import { Regex } from "../../../shared/constants";
-
-import { Translator, ValidationForm } from "../../../shared/types";
+import { Translator, ValidationForm } from "@/shared/types";
 
 export const passwordValidation = (t: Translator) =>
   Yup.string()
@@ -47,29 +44,6 @@ export const newPasswordValidationForm: ValidationForm<{
   Yup.object({
     newPassword: passwordValidation(t),
   });
-
-// export const confirmPasswordValidationForm: ValidationForm<{
-//   password: string;
-//   confirmPassword: string;
-// }> = (t) =>
-//   Yup.object({
-//     confirmPassword: Yup.string()
-//       .oneOf([Yup.ref("password")], t("global.error.invalidConfirmPassword"))
-//       .required(t("global.error.required")),
-//   }).concat(passwordValidationForm(t));
-
-// export const confirmNewPasswordValidationForm: ValidationForm<{
-//   password: string;
-//   newPassword: string;
-//   confirmPassword: string;
-// }> = (t) =>
-//   Yup.object({
-//     confirmPassword: Yup.string()
-//       .oneOf([Yup.ref("newPassword")], t("global.error.invalidConfirmPassword"))
-//       .required(t("global.error.required")),
-//   })
-//     .concat(newPasswordValidationForm(t))
-//     .concat(passwordValidationForm(t));
 
 export interface RegisterFormValues {
   email: string;

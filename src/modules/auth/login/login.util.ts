@@ -1,9 +1,6 @@
-import { AuthCredentials, ValidationForm } from "../../../shared/types";
+import { AuthCredentials, ValidationForm } from "@/shared/types";
 
-import {
-  emailValidationForm,
-  passwordValidationForm,
-} from "./../register/register.util";
+import * as Yup from "yup";
 
 export interface LoginFormValues extends AuthCredentials {
   email: string;
@@ -15,5 +12,11 @@ export const initialValues: LoginFormValues = {
   password: "",
 };
 
-// export const validation: ValidationForm<LoginFormValues> = (t) =>
-//   emailValidationForm(t).concat(passwordValidationForm(t));
+export const validation: ValidationForm<LoginFormValues> = (t) => {
+  return Yup.object({
+    email: Yup.string()
+      .email(t("global.error.invalidEmail"))
+      .required(t("global.error.required")),
+    password: Yup.string().required(t("global.error.required")),
+  });
+};

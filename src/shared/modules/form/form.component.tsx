@@ -1,13 +1,15 @@
 import * as React from "react";
+
 import _ from "lodash";
-import { Formik, FormikConfig, FormikValues } from "formik"; // Asegúrate de importar FormikConfig y FormikValues
 
-import { Button, Checkbox, Field, Radio } from "../../../shared/modules";
-import { useTranslation } from "../../hooks";
-import { DictionaryService } from "../../services";
-import { FormField, FormProps } from "../../types";
+import { Formik, FormikValues } from "formik";
 
-// Añade una restricción al tipo genérico T para que extienda FormikValues
+import { Button, Checkbox, Field, Radio } from "@/shared/modules";
+
+import { useTranslation } from "@/shared/hooks";
+
+import { FormField, FormProps } from "@/shared/types";
+
 const Form = <T extends FormikValues>({
   children,
   fields,
@@ -20,11 +22,10 @@ const Form = <T extends FormikValues>({
   const validationSchema: any = validation ? validation(t) : undefined;
 
   const handleSubmit = async (values: T) => {
-    console.log("CLICKED!!!");
     try {
       onSubmit(values);
     } catch (error) {
-      console.log(error);
+      console.log(error); // TODO IMPLEMENT ERROR POP UP
     }
   };
 

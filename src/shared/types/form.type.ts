@@ -41,7 +41,7 @@ export interface FormField<N = string> {
 
 export interface FormProps<T> {
   fields?: FormFieldOption<keyof T>[];
-  initialValues: T;
+  initialValues: T | undefined;
   validation?: ValidationForm<T>;
   children?:
     | ((props: {

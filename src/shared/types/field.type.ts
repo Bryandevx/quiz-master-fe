@@ -1,7 +1,7 @@
 import { DictionaryLeaves, FormField } from ".";
 
 export interface FieldProps<N = string> extends FormField<N> {
-  //   icon?: IconName;
+  icon?: string;
   disabled?: boolean;
   label?: DictionaryLeaves;
   placeholder?: DictionaryLeaves;

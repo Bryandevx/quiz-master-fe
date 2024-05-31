@@ -1,3 +1,2 @@
-import ProfileComponent from "./profile.component";
-
-export { ProfileComponent };
+import Profile from "./profile.component";
+export { Profile };

@@ -1,16 +1,21 @@
-import { DictionaryService } from "../services";
+import { ProfileFormValues } from "@/modules/profile/profile.util";
 
-import { Translator, UserProfileDescription, UserRequestData } from "../types";
+import { DictionaryService } from "@/shared/services";
+
+import {
+  Translator,
+  UserProfileDescription,
+  UserRequestData,
+} from "@/shared/types";
 
 class User {
   private t: Translator;
 
   public data: UserRequestData;
 
-  constructor(t: Translator, data: UserRequestData) {
+  constructor(t: Translator, data?: ProfileFormValues) {
     this.t = t;
-
-    this.data = data;
+    this.data = data || {};
   }
 
   get email() {
@@ -44,8 +49,13 @@ class User {
     };
   }
 
-  get profileForm() {
-    return this.data;
+  get profileForm(): ProfileFormValues {
+    return {
+      email: this.data.email || "",
+      username: this.data.username || "",
+      firstName: this.data.firstName || "",
+      lastName: this.data.lastName || "",
+    };
   }
 
   get profileDescription(): UserProfileDescription {
@@ -65,10 +75,20 @@ class User {
         )}`
       );
     } else {
-      // Manejo si la propiedad language es undefined o null
-      // Por ejemplo, devolver un valor predeterminado o lanzar una excepción
       return "Language not specified";
     }
+  }
+
+  static processCurrentUser(
+    currentUser: UserRequestData,
+    t: Translator
+  ): ProfileFormValues {
+    return {
+      firstName: currentUser.firstName ?? "",
+      lastName: currentUser.lastName ?? "",
+      email: currentUser.email ?? "",
+      username: currentUser.username ?? "",
+    };
   }
 }
 

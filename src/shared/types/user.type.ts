@@ -27,6 +27,7 @@ export interface UpdateProfileValues {
 export interface UserProfileDescription {
   email?: string | null;
   firstName?: string | null;
+  fullName?: string | null;
   username?: string | null;
   language: string;
 }

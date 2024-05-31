@@ -1,12 +1,20 @@
 import type { AppProps } from "next/app";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { ChakraProvider } from "@chakra-ui/react";
-import { RecoilRoot } from "recoil";
-import AuthProvider from "@/shared/contexts/auth.provider";
 
-export default function App({ Component, pageProps }: AppProps) {
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+
+import { ChakraProvider } from "@chakra-ui/react";
+
+import { RecoilRoot } from "recoil";
+
+import { AuthProvider } from "@/shared/contexts";
+
+import { ConfigService } from "@/shared/services";
+
+import Layout from "./layout";
+
+function App({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
-    uri: "http://localhost:5000/graphql",
+    uri: ConfigService.apiUrl,
     cache: new InMemoryCache({ addTypename: false }),
   });
 
@@ -15,10 +23,14 @@ export default function App({ Component, pageProps }: AppProps) {
       <ApolloProvider client={client}>
         <RecoilRoot>
           <AuthProvider>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </AuthProvider>
         </RecoilRoot>
       </ApolloProvider>
     </ChakraProvider>
   );
 }
+
+export default App;

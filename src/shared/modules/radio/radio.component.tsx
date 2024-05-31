@@ -1,9 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
+
 import _ from "lodash";
-import { Radio as ChakraRadio, RadioGroup, Box } from "@chakra-ui/react"; // Importa los componentes de Chakra UI
-// import { Typography } from "../../modules";
-// import { useTheme } from "../../hooks";
-import { RadioProps } from "../../types";
+
+import { Radio as ChakraRadio, RadioGroup, Box } from "@chakra-ui/react";
+
+import { Typography } from "@/shared/modules";
+
+import { RadioProps } from "@/shared/types";
 
 const Radio: React.FC<RadioProps> = ({
   value,
@@ -12,8 +15,6 @@ const Radio: React.FC<RadioProps> = ({
   onFormChange,
   onFormSetValue,
 }) => {
-  // const { colorPalette } = useTheme();
-
   const accessLabel = `radio-${name}`;
 
   return (
@@ -37,11 +38,9 @@ const Radio: React.FC<RadioProps> = ({
             flexDirection: "row",
             justifyContent: "space-between",
             borderWidth: value === option.value ? 2 : 0,
-            // borderColor:
-            //   value === option.value ? colorPalette.gray[500] : undefined,
           }}
         >
-          {/* <Typography path={option.label} subheader /> */}
+          {<Typography text={option.label} />}
           <ChakraRadio value={option.value} my={1} />
         </Box>
       ))}

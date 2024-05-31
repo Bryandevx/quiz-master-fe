@@ -1,9 +1,11 @@
-import * as React from "react";
+import React, { FC } from "react";
 import _ from "lodash";
-import { Button as ChakraButton } from "@chakra-ui/react"; // Importa el componente Button de Chakra UI
-// import { useNavigation } from "@react-navigation/native";
-import { ButtonProps } from "../../types";
-import { useTranslation } from "../../hooks";
+
+import { Button as ChakraButton } from "@chakra-ui/react";
+
+import { ButtonProps } from "@/shared/types";
+
+import { useTranslation } from "@/shared/hooks";
 
 const Button: React.FC<ButtonProps> = ({
   // link,
@@ -18,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   ...otherStyles
 }) => {
   const { t } = useTranslation();
-  // const navigation = useNavigation();
+  // const navigation = useNavigation(); TODO SUPPORT NAVIGATION BUTTON
 
   const onFormat = uppercase ? _.upperCase : (value: string) => value;
 

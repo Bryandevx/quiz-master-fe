@@ -1,36 +1,20 @@
-import * as React from "react";
+import React, { FC, useContext } from "react";
 
-import { ProfileFormValues, initialValues } from "./profile.utils";
+import { useAuth } from "@/shared/hooks";
 
-import { useAuth } from "../../shared/hooks";
+import { Form, Box, Typography } from "@/shared/modules";
 
-import { Form } from "../../shared/modules";
+import { AuthContext } from "@/shared/contexts";
 
-import { Box, Heading } from "@chakra-ui/react";
+import { ProfileFormValues } from "./profile.util";
 
-import { useUserQuery } from "@/shared/generated";
-
-const Profile: React.FC = () => {
+const Profile: FC = () => {
   const { updateProfile } = useAuth();
-
-  //const { register, isRegistering } = useAuth();
+  const { user } = useContext(AuthContext);
 
   const onSubmit = async (values: ProfileFormValues) => {
     await updateProfile(values);
   };
-
-  const user = useUserQuery({
-    variables: {
-      where: {
-        email: "b@test.com",
-      },
-    },
-  });
-  console.log(user.data?.user);
-  initialValues.email = user.data?.user?.email ?? "";
-  initialValues.firstName = user.data?.user?.firstName ?? "";
-  initialValues.lastName = user.data?.user?.lastName ?? "";
-  initialValues.username = user.data?.user?.username ?? "";
 
   return (
     <Box
@@ -40,12 +24,10 @@ const Profile: React.FC = () => {
       height="100vh"
     >
       <Box p={4} shadow="md" rounded="md" bg="white" maxW="400px">
-        <Heading as="h2" size="lg" textAlign="center" mb={4}>
-          Mi Perfil
-        </Heading>
+        <Typography header center text="profile.form.title" mb={4} />
         <Form
           onSubmit={onSubmit}
-          initialValues={initialValues}
+          initialValues={user?.profileForm}
           fields={[
             {
               type: "field",

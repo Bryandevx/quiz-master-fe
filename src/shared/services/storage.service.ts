@@ -1,7 +1,4 @@
 import { Constants } from "../constants";
-
-//import { EmptyCacheError } from '../errors';
-
 import { Language } from "../generated";
 
 enum StorageName {
@@ -9,11 +6,8 @@ enum StorageName {
   ID_TOKEN = "@idToken",
   ID_TOKEN_INFO = "@idTokenInfo",
   REFRESH_TOKEN = "@refreshToken",
+  USER = "@user",
 }
-
-// enum StorageName {
-//   LANGUAGE = "@language",
-// }
 
 class StorageService {
   async clear() {
@@ -31,6 +25,9 @@ class StorageService {
 
   async setLanguage(value: Language) {
     return localStorage.setItem(StorageName.LANGUAGE, value);
+  }
+  async setUser(value: any) {
+    return localStorage.setItem(StorageName.USER, value);
   }
 
   async setIdTokenInfo(value: string) {
@@ -82,6 +79,20 @@ class StorageService {
       const value = (await localStorage.getItem(
         StorageName.ID_TOKEN_INFO
       )) as string;
+
+      if (!value) {
+        // throw new EmptyCacheError();
+      }
+
+      return value;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async getUser(): Promise<any | null> {
+    try {
+      const value = await localStorage.getItem(StorageName.USER);
 
       if (!value) {
         // throw new EmptyCacheError();

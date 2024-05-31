@@ -13,7 +13,13 @@ import {
   useRefreshIdToken,
 } from "@/shared/hooks";
 
-import { EXPIRATION_OFFSET_TIME, GlobalState } from "@/shared/constants";
+import {
+  EXPIRATION_OFFSET_TIME,
+  GlobalState,
+  AppScreen,
+  GlobalRoute,
+  AuthScreen,
+} from "@/shared/constants";
 
 import { User } from "@/shared/models";
 
@@ -21,11 +27,6 @@ import { StorageService } from "@/shared/services";
 
 import {
   Language,
-  // useUserProfileLazyQuery,
-  // useUpdateUserMutation,
-  // useCreateUserMutation,
-  LoginMutation,
-  Role,
   useLoginMutation,
   useSignupMutation,
   useUpdateUserMutation,
@@ -50,11 +51,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const { t, language, setLanguage, switchLanguage } = useTranslation();
 
-  //const [user, setUser] = useGlobalState<UserState>(GlobalState.USER);
-
   const [registerRequest, { isRegistering, setIsRegistering }] = useRegister();
 
-  const [user, setUser] = useState<IUserProfile | undefined>(undefined);
+  const [user, setUser] = useState<User | undefined>(undefined);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [updateUser] = useUpdateUserMutation();
@@ -75,13 +74,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     { loading: isValidatingToken, setData: setRefreshData },
   ] = useRefreshIdToken();
 
-  // const [updateUser, { loading: isProfileUpdating }] = useUpdateUserMutation();
   const [userLogin] = useLoginMutation();
-
-  // const [fetchUser, { data, updateQuery: updateUserCache, refetch }] =
-  //   useUserProfileLazyQuery({
-  //     fetchPolicy: "cache-and-network",
-  //   });
 
   const [createUser] = useSignupMutation();
 
@@ -113,10 +106,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const isExpired = exp && exp <= Math.floor(Date.now() / 1000);
 
-    // const loginWithToken = async () => {
-    //   await fetchUser({ variables: { where: { email } } });
-    // };
-
     const refreshTokenAsync = async () => {
       await refreshIdToken(true);
     };
@@ -125,10 +114,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (exp && isExpired) {
         refreshTokenAsync();
       }
-
-      // if (idToken.length) {
-      //   loginWithToken();
-      // }
     }
     if (exp) {
       const expSeconds =
@@ -143,34 +128,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       };
     }
   }, [idToken]);
-
-  // React.useEffect(() => {
-  //   setUser(data?.user ? new User(t, data.user) : undefined);
-  // }, [data]);
-
-  // React.useEffect(() => {
-  //   if (user && user.language !== language) {
-  //     updateProfile({ language });
-  //   }
-
-  //   user && setRefreshData({ loading: false });
-
-  //   user && setData({ loading: false });
-  // }, [user, language]);
-
-  // const refreshUser = (data: any) => {
-  //   if (data) {
-  //     updateUserCache &&
-  //       updateUserCache(({ user }) => ({
-  //         user: {
-  //           ...user,
-  //           ...data,
-  //         },
-  //       }));
-  //   } else {
-  //     refetch && refetch();
-  //   }
-  // };
 
   const logout = React.useCallback(async () => {
     setUser(undefined);
@@ -198,9 +155,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         },
       },
     });
-    setUser(response.data?.login.user as IUserProfile);
+    const user = new User(t, response.data!.login.user!);
+    setUser(user);
     setIsLoading(false);
-    localStorage.setItem("token", response.data?.login.access_token as string);
+    StorageService.setIdToken(response.data?.login.access_token as string);
+    StorageService.setUser(response.data?.login.user);
     setToken(response.data?.login.access_token as string);
 
     router.push("/");
@@ -213,13 +172,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         data,
       },
     });
-
-    // updateUserCache(({ user }) => ({
-    //   user: {
-    //     ...user,
-    //     ...data,
-    //   },
-    // }));
   }, []);
 
   const changeLanguage = React.useCallback(async (newLanguage: Language) => {
@@ -228,10 +180,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const register = async (values: RegisterFormValues) => {
     try {
-      //    setIsRegistering(true);
-
       const { firstName, lastName, username, email, password } = values;
-
       const profile = {
         firstName,
         lastName,
@@ -240,19 +189,14 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         email,
       };
 
-      // await registerRequest(email, password);
       await createUser({
         variables: {
           data: { ...profile },
         },
       });
 
-      router.push("/login");
-
-      // setIsRegistering(false);
+      router.push(AuthScreen.LOGIN);
     } catch (e) {
-      // setIsRegistering(false);
-
       if (e instanceof Error) {
         if (e.message.includes("username_unique")) {
           throw new AlertError(ErrorType.USER_ALREADY_EXISTS);
@@ -296,20 +240,15 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     <AuthContext.Provider
       value={{
         isAuthenticated: !!user,
-        // user,
+        user,
         isAuthenticating,
         isValidatingToken,
-        // isProfileUpdating,
         login,
         logout,
         changeLanguage,
         updateProfile,
-        // resendConfirmationCode,
-        // confirmRegistration,
-        // changePassword,
         isRegistering,
         register,
-        //     refreshUser,
       }}
     >
       {children}

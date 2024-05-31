@@ -5,6 +5,7 @@ import { LanguageOption } from "./../types";
 export * from "./global-state.constant";
 export * from "./regex.constant";
 export * from "./auth.constant";
+export * from "./routes.constants";
 
 interface ConstantsValues {
   PARAM: string;
